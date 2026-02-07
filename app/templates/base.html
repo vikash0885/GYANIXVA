@@ -31,7 +31,6 @@
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('main.home') }}">Home</a></li>
 
-                    {% if current_user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="toolsDropdown" role="button"
                             data-bs-toggle="dropdown">
@@ -79,23 +78,14 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-bs-toggle="dropdown">
-                            {{ current_user.username }}
+                            <i class="bi bi-person-circle"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
                             <li><a class="dropdown-item text-light" href="{{ url_for('main.profile') }}">Profile</a>
                             </li>
-                            <li>
-                                <hr class="dropdown-divider bg-secondary">
-                            </li>
-                            <li><a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}">Logout</a></li>
                         </ul>
                     </li>
-                    {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Login</a></li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="btn btn-primary btn-sm" href="{{ url_for('auth.register') }}">Get Started</a>
-                    </li>
-                    {% endif %}
+
                 </ul>
             </div>
         </div>
