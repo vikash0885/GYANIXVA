@@ -23,7 +23,42 @@ def colleges():
         query = query.filter(College.course.ilike(f'%{course}%'))
         
     colleges_list = query.all()
-    return render_template('resources/college_finder.html', colleges=colleges_list)
+    
+    # AI Fallback if no results found
+    is_ai_generated = False
+    if not colleges_list and (location or course):
+        try:
+            from app.utils.ai_helper import generate_response
+            import json
+            
+            prompt = f"""
+            List 3 top colleges in {location or 'India'} for {course or 'any course'}. 
+            Provide details in valid JSON format:
+            [
+                {{"name": "College Name", "location": "City", "course": "Course", "fees": "Fees", "ranking": 1, "exams_required": "Exam Name"}}
+            ]
+            Do not include any text outside the JSON array.
+            """
+            response = generate_response(prompt)
+            # Clean response to ensure valid JSON
+            start = response.find('[')
+            end = response.rfind(']') + 1
+            if start != -1 and end != -1:
+                json_data = json.loads(response[start:end])
+                for item in json_data:
+                    colleges_list.append(College(
+                        name=item.get('name', 'Unknown'),
+                        location=item.get('location', location),
+                        course=item.get('course', course),
+                        fees=item.get('fees', 'N/A'),
+                        ranking=item.get('ranking', 0),
+                        exams_required=item.get('exams_required', 'N/A')
+                    ))
+                is_ai_generated = True
+        except Exception as e:
+            print(f"AI Search Error: {e}")
+            
+    return render_template('resources/college_finder.html', colleges=colleges_list, is_ai_generated=is_ai_generated)
 
 @resources.route('/resources/exams')
 @login_required
