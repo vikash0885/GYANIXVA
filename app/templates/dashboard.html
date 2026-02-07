@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2>Hello, <span class="text-gradient">{{ user.full_name }}</span>! 👋</h2>
+        <p class="text-secondary">Here's your study progress for today.</p>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <!-- Stats Cards -->
+    <div class="col-md-3">
+        <div class="card-premium p-3 d-flex align-items-center gap-3">
+            <div class="bg-primary bg-opacity-25 p-3 rounded-circle text-primary">
+                <i class="bi bi-clock-history fs-4"></i>
+            </div>
+            <div>
+                <div class="h5 mb-0">2.5 hrs</div>
+                <div class="small text-secondary">Study Time</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-premium p-3 d-flex align-items-center gap-3">
+            <div class="bg-success bg-opacity-25 p-3 rounded-circle text-success">
+                <i class="bi bi-check-circle fs-4"></i>
+            </div>
+            <div>
+                <div class="h5 mb-0">12</div>
+                <div class="small text-secondary">Tasks Done</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-premium p-3 d-flex align-items-center gap-3">
+            <div class="bg-warning bg-opacity-25 p-3 rounded-circle text-warning">
+                <i class="bi bi-fire fs-4"></i>
+            </div>
+            <div>
+                <div class="h5 mb-0">5 Days</div>
+                <div class="small text-secondary">Streak</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-premium p-3 d-flex align-items-center gap-3">
+            <div class="bg-info bg-opacity-25 p-3 rounded-circle text-info">
+                <i class="bi bi-bullseye fs-4"></i>
+            </div>
+            <div>
+                <div class="h5 mb-0">85%</div>
+                <div class="small text-secondary">Goal Reach</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Quick Actions -->
+    <div class="col-lg-8">
+        <div class="card-premium h-100">
+            <h4 class="mb-4">Recent Activity</h4>
+            <div class="list-group list-group-flush bg-transparent">
+                <!-- Placeholder items -->
+                <div
+                    class="list-group-item bg-transparent text-secondary border-secondary d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="bi bi-chat-left-text me-2"></i> Asked about "Thermodynamics"
+                    </div>
+                    <span class="badge bg-secondary">2 mins ago</span>
+                </div>
+                <div
+                    class="list-group-item bg-transparent text-secondary border-secondary d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="bi bi-journal-text me-2"></i> Completed "Physics Chapter 1"
+                    </div>
+                    <span class="badge bg-secondary">1 hour ago</span>
+                </div>
+                <div
+                    class="list-group-item bg-transparent text-secondary border-secondary d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="bi bi-trophy me-2"></i> Earned "Early Bird" Badge
+                    </div>
+                    <span class="badge bg-secondary">Yesterday</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <!-- Study Timer Widget -->
+        <div class="card-premium mb-4 text-center">
+            <h5 class="mb-3"><i class="bi bi-stopwatch text-danger"></i> Focus Timer</h5>
+            <div class="display-4 font-monospace mb-3" id="timer-display">00:00</div>
+            <button id="start-btn" class="btn btn-success w-100 mb-2">Start Focus Session</button>
+            <button id="stop-btn" class="btn btn-danger w-100 d-none">Stop & Save</button>
+        </div>
+
+        <div class="card-premium h-100">
+            <h4 class="mb-4">Quick Tools</h4>
+            <div class="d-grid gap-3">
+                <button class="btn btn-outline-light text-start p-3">
+                    <i class="bi bi-robot me-2 text-primary"></i> Ask AI Tutor
+                </button>
+                <button class="btn btn-outline-light text-start p-3">
+                    <i class="bi bi-calendar-plus me-2 text-warning"></i> Generate Study Plan
+                </button>
+                <button class="btn btn-outline-light text-start p-3">
+                    <i class="bi bi-book me-2 text-success"></i> Find Colleges
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let timer;
+    let seconds = 0;
+    const display = document.getElementById('timer-display');
+    const startBtn = document.getElementById('start-btn');
+    const stopBtn = document.getElementById('stop-btn');
+
+    startBtn.addEventListener('click', () => {
+        startBtn.classList.add('d-none');
+        stopBtn.classList.remove('d-none');
+        timer = setInterval(() => {
+            seconds++;
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            display.textContent = `${mins}:${secs}`;
+        }, 1000);
+    });
+
+    stopBtn.addEventListener('click', async () => {
+        clearInterval(timer);
+        const duration = Math.ceil(seconds / 60); // minutes
+
+        await fetch('/track-study', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ duration: duration })
+        });
+
+        alert(`Good job! Logged ${duration} minutes.`);
+        location.reload();
+    });
+</script>
+{% endblock %}

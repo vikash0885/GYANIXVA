@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-9">
+        <h2 class="text-gradient"><i class="bi bi-building me-2"></i>College Finder</h2>
+        <p class="text-secondary">Explore top colleges, fees, and admission details.</p>
+    </div>
+    <div class="col-md-3 text-end">
+        <a href="{{ url_for('resources.seed_data') }}" class="btn btn-sm btn-outline-warning"
+            title="Populate Demo Data">
+            <i class="bi bi-database-add"></i> Seed Data
+        </a>
+    </div>
+</div>
+
+<div class="row mb-4 justify-content-center">
+    <div class="col-md-8">
+        <form action="{{ url_for('resources.colleges') }}" method="GET">
+            <div class="input-group">
+                <input type="text" name="search"
+                    class="form-control form-control-lg bg-dark border-secondary text-light"
+                    placeholder="Search by name or course..." value="{{ request.args.get('search', '') }}">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row g-4">
+    {% for college in colleges %}
+    <div class="col-md-4">
+        <div class="card-premium h-100">
+            <span class="badge bg-primary mb-2">Rank #{{ college.ranking }}</span>
+            <h4>{{ college.name }}</h4>
+            <p class="text-secondary small"><i class="bi bi-geo-alt-fill"></i> {{ college.location }}</p>
+            <hr class="border-secondary">
+            <div class="d-flex justify-content-between mb-2">
+                <span class="text-light">Course:</span>
+                <span class="text-info">{{ college.course }}</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span class="text-light">Fees:</span>
+                <span class="text-warning">{{ college.fees }}</span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span class="text-light">Exam:</span>
+                <span class="text-success">{{ college.exams_required }}</span>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center text-secondary py-5">
+        <h4>No colleges found.</h4>
+        <p>Try searching for something else or click "Seed Data" to load sample data.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

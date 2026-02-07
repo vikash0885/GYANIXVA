@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row align-items-center min-vh-75 py-5">
+    <div class="col-lg-6">
+        <h1 class="display-3 mb-4">Master Your Studies with <span class="text-gradient">AI Power</span></h1>
+        <p class="lead text-secondary mb-5">Your personalized intelligent platform for smarter studying, exam prep, and
+            career guidance. Unlock your potential today.</p>
+        <div class="d-flex gap-3">
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg px-4">Start Learning Free</a>
+            <a href="#" class="btn btn-outline-light btn-lg px-4">Explore Features</a>
+        </div>
+    </div>
+    <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+        <!-- Placeholder for a Hero Image/Illustration -->
+        <div class="p-5 rounded-4"
+            style="background: radial-gradient(circle at center, rgba(99, 102, 241, 0.2) 0%, transparent 70%);">
+            <i class="bi bi-robot display-1 text-primary" style="font-size: 8rem; opacity: 0.8;"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 py-5">
+    <div class="col-md-4">
+        <div class="card-premium h-100">
+            <i class="bi bi-chat-dots-fill text-info fs-2 mb-3"></i>
+            <h4>AI Study Chatbot</h4>
+            <p class="text-secondary">Instant answers to your doubts across all subjects with personalized explanations.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-premium h-100">
+            <i class="bi bi-calendar-check-fill text-warning fs-2 mb-3"></i>
+            <h4>Smart Study Plans</h4>
+            <p class="text-secondary">Auto-generated schedules based on your exams, weakness, and available time.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-premium h-100">
+            <i class="bi bi-award-fill text-success fs-2 mb-3"></i>
+            <h4>Exam Guidance</h4>
+            <p class="text-secondary">Comprehensive resources for JEE, NEET, UPSC, and more.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 text-center">
+        <h1 class="text-gradient display-4 mb-3">AI Personal Tutor</h1>
+        <p class="lead text-secondary">Your personalized learning dashboard based on your activity.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card-premium h-100 border-danger bg-danger bg-opacity-10">
+            <h3 class="mb-4 text-danger"><i class="bi bi-exclamation-triangle me-2"></i>Topics to Improve</h3>
+            <ul class="list-group list-group-flush bg-transparent">
+                {% for area in weak_areas %}
+                <li class="list-group-item bg-transparent text-light border-danger">
+                    <i class="bi bi-dot me-2"></i>{{ area }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card-premium h-100 border-success bg-success bg-opacity-10">
+            <h3 class="mb-4 text-success"><i class="bi bi-lightbulb me-2"></i>Recommended Actions</h3>
+            <ul class="list-group list-group-flush bg-transparent">
+                {% for sug in suggestions %}
+                <li class="list-group-item bg-transparent text-light border-success">
+                    <i class="bi bi-check2-circle me-2"></i>{{ sug }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

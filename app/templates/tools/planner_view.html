@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-gradient"><i class="bi bi-journal-bookmark-fill me-2"></i>Your Study Plan</h2>
+            <a href="{{ url_for('tools.planner') }}" class="btn btn-outline-light btn-sm">Create New</a>
+        </div>
+
+        <div class="card-premium mb-4">
+            <div class="row g-3 mb-4 border-bottom border-secondary pb-3">
+                <div class="col-md-4">
+                    <div class="text-secondary small">GOAL</div>
+                    <div class="h5">{{ plan.goal }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-secondary small">TARGET</div>
+                    <div class="h5">{{ plan.target_date }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-secondary small">INTENSITY</div>
+                    <div class="h5">{{ plan.daily_hours }} hrs/day</div>
+                </div>
+            </div>
+
+            <div class="plan-content">
+                <p class="lead mb-4">Here is your recommended strategy:</p>
+                <!-- AI Content Render Area -->
+                <div class="p-3 bg-dark bg-opacity-25 rounded-3 border border-secondary text-light">
+                    {{ plan.content }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

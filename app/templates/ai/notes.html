@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card-premium mb-4">
+            <h2 class="mb-4 text-gradient"><i class="bi bi-journal-text me-2"></i>AI Notes Generator</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label text-secondary">Topic</label>
+                    <input type="text" class="form-control" name="topic" placeholder="e.g. Photosynthesis"
+                        value="{{ topic if topic else '' }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-secondary">Type</label>
+                    <select class="form-select bg-dark text-light border-secondary" name="type">
+                        <option value="summary">Summary Notes</option>
+                        <option value="flashcards">Flashcards</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Generate Notes</button>
+            </form>
+        </div>
+
+        {% if result %}
+        <div class="card-premium">
+            {{ result|safe }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
