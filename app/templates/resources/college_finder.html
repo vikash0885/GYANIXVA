@@ -18,7 +18,7 @@
     <div class="col-md-10">
         <form action="{{ url_for('resources.colleges') }}" method="GET" class="card-premium p-4">
             <div class="row g-3">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label class="form-label text-secondary">Location</label>
                     <div class="input-group">
                         <span class="input-group-text bg-dark border-secondary text-secondary"><i
@@ -27,16 +27,7 @@
                             placeholder="e.g. Delhi, Mumbai" value="{{ request.args.get('location', '') }}">
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <label class="form-label text-secondary">College Name</label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-dark border-secondary text-secondary"><i
-                                class="bi bi-building"></i></span>
-                        <input type="text" name="name" class="form-control bg-dark border-secondary text-light ps-2"
-                            placeholder="e.g. IIT, AIIMS" value="{{ request.args.get('name', '') }}">
-                    </div>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label class="form-label text-secondary">Course</label>
                     <div class="input-group">
                         <span class="input-group-text bg-dark border-secondary text-secondary"><i

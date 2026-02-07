@@ -8,16 +8,17 @@ resources = Blueprint('resources', __name__)
 @resources.route('/resources/colleges')
 @login_required
 def colleges():
+    # Auto-seed if empty
+    if College.query.count() == 0:
+        seed_data()
+        
     location = request.args.get('location')
-    name = request.args.get('name')
     course = request.args.get('course')
     
     query = College.query
     
     if location:
         query = query.filter(College.location.ilike(f'%{location}%'))
-    if name:
-        query = query.filter(College.name.ilike(f'%{name}%'))
     if course:
         query = query.filter(College.course.ilike(f'%{course}%'))
         
