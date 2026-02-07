@@ -123,12 +123,20 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Configure marked options
+            marked.use({
+                breaks: true,
+                gfm: true
+            });
+
             const messageContents = document.querySelectorAll('.message-content');
             messageContents.forEach(el => {
-                // If it's an AI message (usually wrapped in another div or identifiable)
-                // For now, parse all message-content that doesn't start with HTML
-                if (!el.innerHTML.trim().startsWith('<')) {
-                    el.innerHTML = marked.parse(el.textContent);
+                // Parse markdown content
+                // We access textContent to get the raw markdown
+                const rawMarkdown = el.textContent.trim();
+
+                if (rawMarkdown) {
+                    el.innerHTML = marked.parse(rawMarkdown);
                 }
             });
         });

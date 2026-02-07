@@ -37,8 +37,77 @@ div {
     font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
 }
 
-display: flex;
-flex-direction: column;
+/* Markdown Content Styles */
+.message-content h1,
+.message-content h2,
+.message-content h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.message-content h1 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 0.25rem;
+}
+
+.message-content h2 {
+    font-size: 1.25rem;
+}
+
+.message-content h3 {
+    font-size: 1.1rem;
+}
+
+.message-content ul,
+.message-content ol {
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.message-content li {
+    margin-bottom: 0.25rem;
+}
+
+.message-content strong {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.message-content code {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    color: #e2e8f0;
+    font-family: 'Consolas', 'Monaco', monospace !important;
+    font-size: 0.9em;
+}
+
+.message-content pre {
+    background: #1e1e1e;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1rem 0;
+}
+
+.message-content pre code {
+    background: transparent;
+    padding: 0;
+    color: #d4d4d4;
+    font-size: 0.9em;
+}
+
+.message-content p {
+    margin-bottom: 0.75rem;
+}
+
+.message-content a {
+    color: var(--accent-color);
+    text-decoration: underline;
 }
 
 h1,
