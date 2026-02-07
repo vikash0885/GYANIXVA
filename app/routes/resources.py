@@ -8,12 +8,20 @@ resources = Blueprint('resources', __name__)
 @resources.route('/resources/colleges')
 @login_required
 def colleges():
-    query = request.args.get('search')
-    if query:
-        colleges_list = College.query.filter(College.name.contains(query) | College.course.contains(query)).all()
-    else:
-        # Limit to 10 for display
-        colleges_list = College.query.limit(10).all()
+    location = request.args.get('location')
+    name = request.args.get('name')
+    course = request.args.get('course')
+    
+    query = College.query
+    
+    if location:
+        query = query.filter(College.location.ilike(f'%{location}%'))
+    if name:
+        query = query.filter(College.name.ilike(f'%{name}%'))
+    if course:
+        query = query.filter(College.course.ilike(f'%{course}%'))
+        
+    colleges_list = query.all()
     return render_template('resources/college_finder.html', colleges=colleges_list)
 
 @resources.route('/resources/exams')
