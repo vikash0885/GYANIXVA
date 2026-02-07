@@ -127,27 +127,94 @@ h6 {
     background-clip: text;
 }
 
-/* Navbar */
-.navbar {
-    background-color: rgba(10, 10, 10, 0.9) !important;
-    backdrop-filter: blur(12px);
-    border-bottom: var(--glass-border);
+/* Navigation & Sidebar */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    border-right: var(--glass-border);
+    padding: 1.5rem 1rem;
+    overflow-y: auto;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
 }
 
-.navbar-brand {
-    font-weight: 800;
-    font-size: 1.5rem;
+.sidebar-header {
+    margin-bottom: 2rem;
+    padding-left: 0.5rem;
+}
+
+.nav-item {
+    margin-bottom: 0.5rem;
 }
 
 .nav-link {
-    color: var(--text-secondary) !important;
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
     font-weight: 500;
-    transition: color 0.3s ease;
+}
+
+.nav-link i {
+    font-size: 1.25rem;
+    margin-right: 0.75rem;
+    width: 24px;
+    text-align: center;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--text-primary) !important;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.nav-link.active {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--accent-color);
+}
+
+.nav-section-label {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+}
+
+/* Main Wrapper Adjustment */
+.wrapper {
+    margin-left: 260px;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mobile Toggle */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .wrapper {
+        margin-left: 0;
+    }
 }
 
 /* Buttons */
