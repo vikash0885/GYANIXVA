@@ -1,14 +1,14 @@
 :root {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent-color: #6366f1;
-    /* Indigo */
-    --accent-hover: #4f46e5;
-    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-    --card-bg: rgba(30, 41, 59, 0.7);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #171717;
+    --text-primary: #ededed;
+    --text-secondary: #a1a1aa;
+    --accent-color: #3b82f6;
+    /* Professional Blue */
+    --accent-hover: #2563eb;
+    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    --card-bg: rgba(23, 23, 23, 0.8);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 body {
@@ -60,8 +60,8 @@ h6 {
 
 /* Navbar */
 .navbar {
-    background-color: rgba(15, 23, 42, 0.9) !important;
-    backdrop-filter: blur(10px);
+    background-color: rgba(10, 10, 10, 0.9) !important;
+    backdrop-filter: blur(12px);
     border-bottom: var(--glass-border);
 }
 
